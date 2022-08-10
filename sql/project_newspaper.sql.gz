@@ -1,0 +1,358 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 10, 2022 at 11:00 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `project_newspaper`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `category_name`, `category_description`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'Academic News', 'Academic News', 1, '2022-08-10 14:28:33', '2022-08-10 14:28:33'),
+(2, 'Departmental News', 'Departmental News', 1, '2022-08-10 14:29:02', '2022-08-10 14:29:02'),
+(3, 'Hall News', 'Hall News', 1, '2022-08-10 14:29:07', '2022-08-10 14:29:07'),
+(4, 'Club News', 'Club News', 1, '2022-08-10 14:29:17', '2022-08-10 14:30:22'),
+(5, 'Sport News', 'Sport News', 1, '2022-08-10 14:29:26', '2022-08-10 14:30:40'),
+(6, 'Others', 'Others', 1, '2022-08-10 14:29:34', '2022-08-10 14:29:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `post_id` int(10) UNSIGNED NOT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `frontends`
+--
+
+CREATE TABLE `frontends` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(12, '2014_10_12_100000_create_password_resets_table', 1),
+(13, '2019_08_19_000000_create_failed_jobs_table', 1),
+(14, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(15, '2022_07_01_034414_create_categories_table', 1),
+(17, '2022_07_01_075631_create_posts_table', 2),
+(18, '2022_08_05_081135_create_frontends_table', 2),
+(19, '2022_08_06_052106_create_postcs_table', 3),
+(20, '2022_08_06_052141_create_comments_table', 3),
+(23, '2014_10_12_000000_create_users_table', 4),
+(24, '2022_08_06_091346_create_comments_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `postcs`
+--
+
+CREATE TABLE `postcs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `short_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `long_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `view_count` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `post_name`, `post_title`, `category_id`, `short_description`, `long_description`, `post_image`, `active`, `view_count`, `created_at`, `updated_at`) VALUES
+(1, 'রুয়েটে বাড়ছে গবেষণা, মিলছে সফলতা', 'রুয়েটে বাড়ছে গবেষণা, মিলছে সফলতা', 1, 'বিরাজমান সমস্যা নিরসনকল্পে নতুন জ্ঞানের উদ্ভাবন ঘটাতে গবেষণার কোনো বিকল্প নেই।', 'আর গবেষণার সূতিকাগার হিসেবে ধরা হয় দেশের বিভিন্ন উচ্চশিক্ষার প্রতিষ্ঠানগুলোকে। সম্প্রতি রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয় (রুয়েট) কর্তৃপক্ষ শিক্ষক-শিক্ষার্থীদের গবেষণাকর্মে আগ্রহী করতে নানা উদ্যোগ নিয়েছেন। ফলে সহযোগিতা, পৃষ্ঠপোষকতা ও পর্যাপ্ত সুযোগ-সুবিধা পেয়ে রুয়েটে ক্রমেই বাড়ছে গবেষণা কার্যক্রম। এতে মিলছে অভাবনীয় সফলতাও।', '[\"post_images\\/\\u09b0\\u09c1\\u09df\\u09c7\\u099f\\u09c7 \\u09ac\\u09be\\u09dc\\u099b\\u09c7 \\u0997\\u09ac\\u09c7\\u09b7\\u09a3\\u09be, \\u09ae\\u09bf\\u09b2\\u099b\\u09c7 \\u09b8\\u09ab\\u09b2\\u09a4\\u09be_1740807682497321.jpg\"]', 1, 1, '2022-08-10 14:32:56', '2022-08-10 14:37:35'),
+(2, 'RUET Help Making it!', 'RUET Help Making it!', 1, 'করোনা ভাইরাস এর ইস্যুতে হ্যান্ড সেনিটাইজারের প্রাপ্যতা যেখানে দুষ্কর । সেই প্রাপ্যতাকে একটু সহজলভ্য ...', 'করোনা ভাইরাস এর ইস্যুতে হ্যান্ড সেনিটাইজারের প্রাপ্যতা যেখানে দুষ্কর । সেই প্রাপ্যতাকে একটু সহজলভ্য করার জন্য এবং রাজশাহী মেডিকেল কলেজসহ রাজশাহীর অন্যসব সেবাপ্রদানকারী জায়গায় হ্যান্ড সেনিটাইজার সরবরাহ করার সুনিশ্চিত করার লক্ষ্যে আমাদের Department Of Chemical and Food Process Engineering , RUET এর উদ্যোগ। সকল রুয়েটিয়ানের সহযোগীতা একান্তভাবে কাম্য', '[\"post_images\\/RUET Help Making it!_1740807772104574.jpg\"]', 1, 1, '2022-08-10 14:34:22', '2022-08-10 14:58:17'),
+(3, 'পদ্মা বহুমুখী সেতুর মূল সেতু প্রকল্পে নির্বাহী প্রকৌশলী হিসেবে ছিলেন রুয়েটিয়ান', 'পদ্মা বহুমুখী সেতুর মূল সেতু প্রকল্পে নির্বাহী প্রকৌশলী হিসেবে ছিলেন রুয়েটিয়ান', 6, 'পদ্মা বহুমুখী সেতুর মূল সেতু প্রকল্পে নির্বাহী প্রকৌশলী হিসেবে ছিলেন রুয়েটিয়ান দেওয়ান মোহাম্মদ আবদুল কাদের ।', 'পদ্মা বহুমুখী সেতুর মূল সেতু প্রকল্পে নির্বাহী প্রকৌশলী হিসেবে ছিলেন রুয়েটিয়ান দেওয়ান মোহাম্মদ আবদুল কাদের । তিনি রুয়েট সিভিল ইঞ্জিনিয়ারিং ডিপার্টমেন্টের ৯৭ সিরিজের ছাত্র ছিলেন। পদ্মা সেতুর মতো মেগা প্রজেক্ট যে দেশি ইঞ্জিনিয়ারদের তত্ত্বাবধানে সংঘটিত হয়েছে তা এই দেশের প্রকৌশলী সমাজের সক্ষমতা প্রমাণ করার জন্য একধরণের গর্বের বিষয়। ‌বিবিসি বাংলায় পদ্মা সেতুর প্রকল্পের কারিগরি চ্যালেঞ্জ নিয়ে দেওয়ান মোহাম্মদ আবদুল কাদেরের দেয়া সাক্ষাৎকারটি দেখে নিতে পারেন এই লিংকে - https://youtu.be/sh5inUpV2JI', '[\"post_images\\/\\u09aa\\u09a6\\u09cd\\u09ae\\u09be \\u09ac\\u09b9\\u09c1\\u09ae\\u09c1\\u0996\\u09c0 \\u09b8\\u09c7\\u09a4\\u09c1\\u09b0 \\u09ae\\u09c2\\u09b2 \\u09b8\\u09c7\\u09a4\\u09c1 \\u09aa\\u09cd\\u09b0\\u0995\\u09b2\\u09cd\\u09aa\\u09c7 \\u09a8\\u09bf\\u09b0\\u09cd\\u09ac\\u09be\\u09b9\\u09c0 \\u09aa\\u09cd\\u09b0\\u0995\\u09cc\\u09b6\\u09b2\\u09c0 \\u09b9\\u09bf\\u09b8\\u09c7\\u09ac\\u09c7 \\u099b\\u09bf\\u09b2\\u09c7\\u09a8 \\u09b0\\u09c1\\u09df\\u09c7\\u099f\\u09bf\\u09df\\u09be\\u09a8_1740807828288238.jpg\"]', 1, 0, '2022-08-10 14:35:15', '2022-08-10 14:35:15'),
+(4, 'RUET CSE FEST 2022', 'RUET CSE FEST 2022', 2, 'Presenting Team Spider Alpha, Champion of Line Follower Robot, RUET CSE Fest 2K22.', 'Presenting Team Spider Alpha, Champion of Line Follower Robot, RUET CSE Fest 2K22. Team Megabot won the prize of 1st Runners-Up and Team IUB Fabbers G1 secured the position of 2nd Runners-Up. Congratulations to you all. See you in our next Mega Event.', '[\"post_images\\/RUET CSE FEST 2022_1740807859606380.jpg\"]', 1, 0, '2022-08-10 14:35:45', '2022-08-10 14:35:45'),
+(5, 'ME Won!', 'ME Won!', 5, 'Congratulations ME for being champion', 'Congratulations ME for being champion 🏆🏆🏆 Also congratulations to GCE for being runners up. 🎊🎉🎊🎉 To know more updates, stay tuned with us.', '[\"post_images\\/ME Won!_1740807903249044.jpg\"]', 1, 0, '2022-08-10 14:36:27', '2022-08-10 14:36:27'),
+(6, 'অটোমেশনের আওতায় এলো রুয়েট কেন্দ্রীয় লাইব্রেরি', 'অটোমেশনের আওতায় এলো রুয়েট কেন্দ্রীয় লাইব্রেরি', 1, 'রাজশাহী: অটোমেশন প্রক্রিয়ার আওতায় এলো রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়ের (রুয়েট) ৩০ হাজার বইয়ের মাধ্যমে সমৃদ্ধ কেন্দ্রীয় লাইব্রেরি। সোমবার (১৮ এপ্রিল) বেলা ১১টার দিকে এ লাইব্রেরি অটোমেশন ...', 'রাজশাহী: অটোমেশন প্রক্রিয়ার আওতায় এলো রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়ের (রুয়েট) ৩০ হাজার বইয়ের মাধ্যমে সমৃদ্ধ কেন্দ্রীয় লাইব্রেরি। সোমবার (১৮ এপ্রিল) বেলা ১১টার দিকে এ লাইব্রেরি অটোমেশন বেজড সফটওয়্যার ‘কোহা’ (ওপেন সোর্স) এর কার্যক্রমের আনুষ্ঠানিক উদ্বোধন করেন রুয়েটের ভাইস-চ্যান্সেলর অধ্যাপক ড. মো. রফিকুল ইসলাম সেখ। এর মধ্য দিয়ে ‘কোহা’ সফটওয়্যারের মাধ্যমে লাইব্রেরি অব কংগ্রেসসহ বিশ্বের বড় বড় লাইব্রেরির সঙ্গে যুক্ত হয়ে বিশেষ সুবিধা পাবে বিশ্ববিদ্যালয়টির শিক্ষার্থীরা। বিশ্ববিদ্যালয়টির লাইব্রেরি কর্তৃপক্ষ সূত্রে জানা গেছে, এ সফটওয়্যারের মাধ্যমে ছাত্র-ছাত্রীরা নিজেরাই বই ইস্যু করতে পারবেন। কোন বই কোন গ্যালারিতে আছে, বইটি লাইব্রেরিতে আদৌ আছে কিনা যদি থাকে তাহলে কয়টা আছে আর না থাকলে কার কাছে আছে, কবে নাগাদ বইটি পাওয়া যেতে পারে অতি অল্প সময়ে সহজেই তা জানা যাবে। এজন্য প্রত্যেক ছাত্র কিংবা শিক্ষকের নিজস্ব একটি ইউজার আইডি থাকবে। এর মাধ্যমে অনলাইনে জানা যাবে তার কাছে কয়টা বই আছে। বই ফেরত দিতে দেরি হলে কত টাকা জরিমানা হয়েছে তা নিজেরাই অনলাইনের মাধ্যমে পেমেন্ট করতে পারবে। বই ফেরত দিতে দেরি হলে তাদের নম্বরে মেসেজ ও স্বয়ংক্রিয়ভাবে ই-মেইল চলে যাবে। এ প্রক্রিয়ার মাধ্যমে লাইব্রেরি স্টাফ-কর্মকর্তাদের অনেক সময় বেচে যাবে এবং সেবা দেওয়া সহজতর হবে।', '[\"post_images\\/\\u0985\\u099f\\u09cb\\u09ae\\u09c7\\u09b6\\u09a8\\u09c7\\u09b0 \\u0986\\u0993\\u09a4\\u09be\\u09df \\u098f\\u09b2\\u09cb \\u09b0\\u09c1\\u09df\\u09c7\\u099f \\u0995\\u09c7\\u09a8\\u09cd\\u09a6\\u09cd\\u09b0\\u09c0\\u09df \\u09b2\\u09be\\u0987\\u09ac\\u09cd\\u09b0\\u09c7\\u09b0\\u09bf_1740807951217666.jpg\"]', 1, 0, '2022-08-10 14:37:12', '2022-08-10 14:37:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL DEFAULT 0,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Black Jabbar', 'cheetaof71@gmail.com', NULL, '$2y$10$Kw5LrIEIxqR.Fr3zzZg2Xe8zRG5Xwk5iabgrpCMyNoFnKI73yli/W', 1, NULL, '2022-08-06 03:48:46', '2022-08-06 03:48:46'),
+(2, 'wp-include', 'nademmdreyal2@gamil.com', NULL, '$2y$10$8MbMBtVqFQopQR/ROJlwGObR/GBXblzgzkbHbB0dhY8ycHOvuTSEm', 0, NULL, '2022-08-06 09:46:53', '2022-08-06 09:46:53'),
+(3, 'Songram vai', 'jabbarisback@gmail.com', NULL, '$2y$10$BVp1JAKivQGF0gr1UenocuTLSC6HV2n/FzSM2gf1uF5DGSyVYTKbC', 0, NULL, '2022-08-08 05:20:58', '2022-08-08 05:20:58'),
+(4, 'Mitha Chowdhury', 'mithachowdhury32@gmail.com', NULL, '$2y$10$nbhjBL9tXbdwHMzfYy65VenPOf3wTSdOBGhWp6Zx7QN0u/1HI/JnK', 1, NULL, '2022-08-10 14:23:34', '2022-08-10 14:23:34');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `frontends`
+--
+ALTER TABLE `frontends`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `postcs`
+--
+ALTER TABLE `postcs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `frontends`
+--
+ALTER TABLE `frontends`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `postcs`
+--
+ALTER TABLE `postcs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
