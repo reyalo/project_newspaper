@@ -2,7 +2,7 @@
 @section('main')
 <div class="banner-section">
     <h3 class="tittle">
-        Most Viewd <i class="glyphicon glyphicon-picture"></i>
+        Most Viewed <i class="glyphicon glyphicon-align-center"></i>
     </h3>
     @foreach ($posts_trending as $post_trending)
     <div class="banner">
@@ -23,37 +23,35 @@
         <script src="{{ asset('') }}js/responsiveslides.min.js"></script>
         <script>
             // You can also use "$(window).load(function() {"
-              $(function () {
+            $(function() {
                 // Slideshow 4
                 $("#slider4").responsiveSlides({
-                  auto: true,
-                  pager: true,
-                  nav: true,
-                  speed: 500,
-                  namespace: "callbacks",
-                  before: function () {
-                    $(".events").append("<li>before event fired.</li>");
-                  },
-                  after: function () {
-                    $(".events").append("<li>after event fired.</li>");
-                  },
+                    auto: true,
+                    pager: true,
+                    nav: true,
+                    speed: 500,
+                    namespace: "callbacks",
+                    before: function() {
+                        $(".events").append("<li>before event fired.</li>");
+                    },
+                    after: function() {
+                        $(".events").append("<li>after event fired.</li>");
+                    },
                 });
-              });
+            });
         </script>
         <div class="clearfix"></div>
         <div class="b-bottom">
             <h3 class="top">
-                <a href="{{  route('postView',['id'=>$post_trending->id]) }}">check{{ $post_trending->post_title}}</a>
+                <a href="{{  route('postView',['id'=>$post_trending->id]) }}">{{ $post_trending->post_title}}</a>
 
             </h3>
 
             <p>
                 On {{ $post_trending->created_at}}
-                <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a
-                    class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>{{
+                <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>{{
                     $post_trending->view_count}} </a>
-                <a class="span_link" href="{{  route('postView',['id'=>$post_trending->id]) }}"><span
-                        class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                <a class="span_link" href="{{  route('postView',['id'=>$post_trending->id]) }}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
             </p>
         </div>
     </div>
@@ -64,9 +62,11 @@
     <!--/top-news-->
     <div class="top-news">
         <h3 class="tittle">
-            Recent <i class="glyphicon glyphicon-picture"></i>
+            Recent News <i class="glyphicon glyphicon-th-large"></i>
         </h3>
-        <div class="top-inner second">
+        <!-- OLD CARD -->
+
+                <!-- <div class="top-inner second">
             @foreach ($posts as $post)
             <div class="col-md-6 top-text two">
                 <a href="{{  route('postView',['id'=>$post->id]) }}">
@@ -93,7 +93,42 @@
             </div>
             @endforeach
             <div class="clearfix"></div>
+        </div> -->
+        <!-- OLD CARD -->
+
+
+        <!-- New Card -->
+        
+        <div class="recent-card">
+        @foreach ($posts as $post)
+            <div class="item-1">
+                <a href="{{  route('postView',['id'=>$post->id]) }}" class="card-inside-recent">
+                    @foreach (json_decode($post->post_image) as $image)
+                    <div class="thumb" style="background-image: url('{{ asset($image) }}');"></div>
+                    @break;
+                    @endforeach
+                    <article>
+                        <h1>{{ $post->post_title}}</h1>
+                        <span>
+                            {{ $post->short_description}}
+                        </span>
+                        <span>
+                            On {{ $post->created_at}}
+                            <span class="glyphicon glyphicon-comment"></span>0 
+                            <span class="glyphicon glyphicon-eye-open"></span> 
+                            {{$post->view_count}}
+                            <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                        </span>
+                    </article>
+                </a>
+            </div>
+            @endforeach
         </div>
+        
+        <div class="clearfix"></div>
+        <!-- New Card -->
+
+
     </div>
     <!--//top-news-->
 </div>

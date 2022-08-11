@@ -1,6 +1,6 @@
 @extends('frontend.master')
 @section('title')
-RUET-PEDIa Home page
+RUET PEDIA
 @endsection
 @section('content')
 <div class="full">
@@ -12,7 +12,7 @@ RUET-PEDIa Home page
         <!--//Side view section-->
         <div class="banner-right-text">
             <h3 class="tittle">
-                Trending <i class="glyphicon glyphicon-facetime-video"></i>
+                Trending News <i class="glyphicon glyphicon-th-list"></i>
             </h3>
             <!--/general-news-->
             <div class="general-news">
@@ -22,7 +22,7 @@ RUET-PEDIa Home page
                         @foreach ($posts_trending as $trending)
                         <div class="editor-pics">
                             <div class="col-md-3 item-pic">
-                                {{-- <img src="images/f4.jpg" class="img-responsive" alt="" /> --}}
+                                {{-- <img src="images/f4.jpg" class="img-responsive" alt=""/> --}}
                                 @foreach (json_decode($trending->post_image) as $image2)
                                     <img src="{{ asset($image2) }}" class="img-responsive" alt="IMage Here">
                                 @break
@@ -40,12 +40,13 @@ RUET-PEDIa Home page
                             </div>
                             <div class="clearfix"></div>
                         </div>
+                        
                         @endforeach
-
+                        
                     </div>
                     <div class="media">
                         <h3 class="tittle media">
-                            Media <i class="glyphicon glyphicon-floppy-disk"></i>
+                             Suggested <i class="glyphicon glyphicon-star-empty"></i>
                         </h3>
                         <div class="general-text two">
                             <a href=""><img src="images/gen3.jpg" class="img-responsive" alt="" /></a>
