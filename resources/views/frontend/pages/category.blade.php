@@ -6,51 +6,48 @@
         @foreach ($posts as $post_c )
         @if($post_c->category_name)
         All
-        "{{ $post_c->category_name }}"
+        <span style="color:#e21737 ;">
+            {{ $post_c->category_name }}
+        </span>
         News
+        <i class="glyphicon glyphicon-align-center"></i>
         @else
-            <h1>News Found For this Category.</h1>
+        <h1>News Found For this Category.</h1>
         @endif
         @break;
-        @endforeach
-         <i class="glyphicon glyphicon-picture"></i>
+        @endforeach 
     </h3>
 
 
-    
 
-    <!--/top-news-->
-    <div class="top-news">
+    <!-- New CARD -->
 
-        <div class="top-inner second">
-            @foreach ($posts as $post)
-            <div class="col-md-6 top-text two">
-                <a href="{{  route('postView',['id'=>$post->id]) }}">
-
-                    @foreach (json_decode($post->post_image) as $image)
-                    <img src="{{ asset($image) }}" height="10" class="img-responsive" alt="IMage Here">
-                    @break;
-                    @endforeach
-                </a>
-                <h5 class="top">
-                    <a href="{{  route('postView',['id'=>$post->id]) }}">{{ $post->post_title}}</a>
-                </h5>
-                <p>
-                    {{ $post->short_description}}
-                </p>
-                <p>
-                    On {{ $post->created_at}}
-                    <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a
-                        class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span> {{
-                        $post->view_count}}
-                    </a><a class="span_link" href="{{  route('postView',['id'=>$post->id]) }}"><span
-                            class="glyphicon glyphicon-circle-arrow-right"></span></a>
-                </p>
-            </div>
-            @endforeach
-            <div class="clearfix"></div>
+    <div class="recent-card">
+        @foreach ($posts as $post)
+        <div class="item-1">
+            <a href="{{  route('postView',['id'=>$post->id]) }}" class="card-inside-recent">
+                @foreach (json_decode($post->post_image) as $image)
+                <div class="thumb" style="background-image: url('{{ asset($image) }}');"></div>
+                @break;
+                @endforeach
+                <article>
+                    <h1>{{ $post->post_title}}</h1>
+                    <span>
+                        {{ $post->short_description}}
+                    </span>
+                    <span>
+                        On {{ $post->created_at}}
+                        <span class="glyphicon glyphicon-comment"></span>0
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        {{$post->view_count}}
+                        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                    </span>
+                </article>
+            </a>
         </div>
+        @endforeach
     </div>
-    <!--//top-news-->
+
+    <!-- New CARD -->
 </div>
 @endsection

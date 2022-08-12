@@ -24,7 +24,7 @@ RUET PEDIA
                             <div class="col-md-3 item-pic">
                                 {{-- <img src="images/f4.jpg" class="img-responsive" alt=""/> --}}
                                 @foreach (json_decode($trending->post_image) as $image2)
-                                    <img src="{{ asset($image2) }}" class="img-responsive" alt="IMage Here">
+                                <img src="{{ asset($image2) }}" class="img-responsive" alt="IMage Here">
                                 @break
                                 @endforeach
                             </div>
@@ -40,51 +40,40 @@ RUET PEDIA
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        
+
                         @endforeach
-                        
+
                     </div>
                     <div class="media">
                         <h3 class="tittle media">
-                             Suggested <i class="glyphicon glyphicon-star-empty"></i>
+                            Suggested <i class="glyphicon glyphicon-star-empty"></i>
                         </h3>
+
+                        <!-- NEW SUGGESTED CARD -->
                         <div class="general-text two">
-                            <a href=""><img src="images/gen3.jpg" class="img-responsive" alt="" /></a>
+                            <a href=""><img src="../images/Department.jpg" class="img-responsive" alt="" /></a>
                             <h5 class="top">
-                                <a href="">Consetetur sadipscing elit</a>
+                                <a href="">TITLE</a>
                             </h5>
+
                             <p>
-                                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt labore dolore magna aliquyam eratsed diam justo duo
-                                dolores rebum.
+                                This is SHORT description.
                             </p>
+                            <br>
                             <p>
                                 On Jun 27
                                 <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0
                                 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56
-                                </a><a class="span_link" href=""><span
-                                        class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                </a><a class="span_link" href=""><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                             </p>
+                            <br>
                         </div>
+
+                        <!-- NEW SUGGESTED CARD -->
+
+
                     </div>
-                    <div class="general-text two">
-                        <a href=""><img src="images/gen2.jpg" class="img-responsive" alt="" /></a>
-                        <h5 class="top">
-                            <a href="">Consetetur sadipscing elit</a>
-                        </h5>
-                        <p>
-                            Consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt labore dolore magna aliquyam eratsed diam justo duo
-                            dolores rebum.
-                        </p>
-                        <p>
-                            On Jun 27
-                            <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a
-                                class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56
-                            </a><a class="span_link" href=""><span
-                                    class="glyphicon glyphicon-circle-arrow-right"></span></a>
-                        </p>
-                    </div>
+
                 </div>
             </div>
             <!--//general-news-->
