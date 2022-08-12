@@ -2,7 +2,7 @@
 @section('main')
 <!--banner-section-->
         <div class="banner-section">
-            <h3 class="tittle">{{ $post->post_name }} <i class="glyphicon glyphicon-file"></i></h3>
+            <h3 class="tittle">{{ $post->post_name }} <i class="glyphicon glyphicon-align-left"></i></h3>
             <div class="single">
                 @foreach (json_decode($post->post_image) as $image)
                 <img src="{{ asset($image) }}" class="img-responsive" alt="" />
